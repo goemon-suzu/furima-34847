@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+#has_many :items, dependent: :destroy
+#has_many :orders, dependent: :destroy
 
     with_options presence: true do
       validates :nickname
@@ -18,13 +20,10 @@ class User < ApplicationRecord
         validates :first_name_kana
       end
 
+      with_options format: { with:/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i} do
+        validates :password
+        validates :password_confirmation
+      end
+
     end
-
-  with_options format: { with:/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i} do
-    validates :password
-    validates :password_confirmation
-  end
-
-#has_many :items, dependent: :destroy
-#has_many :orders, dependent: :destroy
 end
