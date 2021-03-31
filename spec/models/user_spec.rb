@@ -11,14 +11,8 @@ RSpec.describe User, type: :model do
     it "全ての項目が正しく入力されてあれば登録できる" do
       expect(@user).to be_valid
     end
-
-    it 'passwordとpassword_confirmationが6文字以上であれば登録できる' do
-      @user.password = '000000'
-      @user.password_confirmation = '000000'
-      expect(@user).to be_valid
-    end
   end
-  
+
   context '新規登録できないとき' do
     it "nicknameが空だと登録できない" do
       @user.nickname = ''
@@ -53,16 +47,37 @@ RSpec.describe User, type: :model do
     end
 
     it "passwordが6文字未満だと登録できない" do
-      @user.password = "00000"
-      @user.password_confirmation = "00000"
+      @user.password = "ab123"
+      @user.password_confirmation = "ab123"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
 
+    it "passwordが英字のみでは登録できない" do
+      @user.password = "abcdef"
+      @user.password_confirmation = "abcdef"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+    end
+
+    it "passwordが数字のみでは登録できない" do
+      @user.password = "123456"
+      @user.password_confirmation = "123456"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+    end
+
+    it "passwordが全角では登録できない" do
+      @user.password = "ＡＢＣＤ１２"
+      @user.password_confirmation = "ＡＢＣＤ１２"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
+    end
+    
     it "passwordが存在してもpassword_confirmationが空では登録できない" do
       @user.password_confirmation = ""
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password confirmation is invalid")
     end
 
     it "last_nameが空では登録できない" do
