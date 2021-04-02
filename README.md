@@ -28,9 +28,9 @@
 | description          | text       | null: false                    |
 | category_id          | integer    | null: false                    |
 | condition_id         | integer    | null: false                    |
-| delivery_ setting_id | integer    | null: false                    |
+| delivery_setting_id  | integer    | null: false                    |
 | shipment_area_id     | integer    | null: false                    |
-| shipping_days_id     | integer    | null: false                    |
+| shipping_day_id      | integer    | null: false                    |
 | price                | integer    | null: false                    |
 | user                 | references | null: false, foreign_key: true |
 
