@@ -6,10 +6,13 @@ RSpec.describe Item, type: :model do
   end
 
   describe '商品出品機能' do
-    it '全て正常なら登録できる' do
+    context "商品登録できるとき" do
+      it "全ての項目が正しく入力されてあれば登録できる" do
       expect(@item).to be_valid
+      end
     end
 
+    context "商品登録できないとき" do
     it 'imageが空では登録できない' do
       @item.image = nil
       @item.valid?
@@ -93,5 +96,6 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is not a number')
     end
+  end
   end
 end
