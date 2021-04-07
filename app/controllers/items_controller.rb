@@ -52,6 +52,6 @@ class ItemsController < ApplicationController
   end
 
   def redirect_to_index
-    return redirect_to root_path if current_user.id != @item.user.id || @item.order!=nil
+    return redirect_to root_path if current_user.id != @item.user.id || !@item.order.nil?
   end
 end
