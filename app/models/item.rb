@@ -3,11 +3,11 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   has_one :order
-  belongs_to_active_hash :category
-  belongs_to_active_hash :condition
-  belongs_to_active_hash :delivery_setting
-  belongs_to_active_hash :shipment_area
-  belongs_to_active_hash :shipping_day
+  belongs_to :category
+  belongs_to :condition
+  belongs_to :delivery_setting
+  belongs_to :shipment_area
+  belongs_to :shipping_day
 
   with_options presence: true do
     validates :item_name
