@@ -4,7 +4,7 @@ function commission(){
   const tax = document.getElementById("add-tax-price");
   const profit = document.getElementById("profit");
 
-  price.addEventListener('input',function(){
+  price.addEventListener("input",function(){
     const selling_price = price.value; 
 
     if (selling_price >= 0 && selling_price <= 9999999){
