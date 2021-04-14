@@ -87,7 +87,6 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Tokenを入力してください')
       end
-
     end
   end
 end

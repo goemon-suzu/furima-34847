@@ -9,13 +9,13 @@ class Item < ApplicationRecord
   belongs_to :shipment_area
   belongs_to :shipping_day
 
-  validates :image, presence: { message: "をアップロードしてください。"}
+  validates :image, presence: { message: 'をアップロードしてください。' }
 
   with_options presence: true do
     validates :item_name
     validates :description
-    
-    with_options numericality: { other_than: 0 , message: "を選択してください。"} do
+
+    with_options numericality: { other_than: 0, message: 'を選択してください。' } do
       validates :category_id
       validates :condition_id
       validates :delivery_setting_id
